@@ -7,10 +7,17 @@ import (
 
 func main() {
 
-	sf, err := httpfs.NewStaticFileSystem("")
+	var sf http.FileSystem
+	var err error
 
-	if err != nil {
-		panic(err)
+	// this error handling is atypical and shown
+	// only for purposes of how to load the filesystem both
+	// with web assets attached to a binary and as a directory
+	if sf, err = httpfs.NewStaticFileSystem(""); err != nil {
+		sf, err = httpfs.NewStaticFileSystem("web")
+		if err != nil {
+			panic(err)
+		}
 	}
 
 	handler := http.FileServer(sf)

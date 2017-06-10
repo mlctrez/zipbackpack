@@ -43,7 +43,7 @@ const (
 func NewStaticFileSystem(assetsPath string) (http.FileSystem, error) {
 	if assetsPath != "" {
 
-		_, err := os.Stat(filepath.Join(assetsPath, "index.html"))
+		_, err := os.Stat(filepath.Join(assetsPath, "_index.html"))
 		if err != nil {
 			return nil, err
 		}
