@@ -2,6 +2,7 @@ package main
 
 import (
 	"github.com/mlctrez/zipbackpack/httpfs"
+	"log"
 	"net/http"
 )
 
@@ -27,6 +28,11 @@ func main() {
 		rw.Write([]byte("api handler for " + r.URL.Path))
 	})
 
-	http.ListenAndServe(":8888", nil)
+	log.Println("listening on :8080")
+
+	err = http.ListenAndServe(":8080", nil)
+	if err != nil {
+		panic(err)
+	}
 
 }
